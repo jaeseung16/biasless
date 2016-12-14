@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="/static/biasless.css">
+		<title>Main</title>
+	</head>
+	
+	<body>
+		<div class="biasless-container">
+			<ul class="biasless-navbar w3-row w3-border w3-gray">
+				<li class="w3-col s8 w3-xlarge"><b><a href="/">BIASLESS</a></b></li>
+				<li class="w3-col s2 w3-large w3-center"><b><a href="#">Your Bias: {{error}}</a></b></li>
+				<li class="w3-col s1 w3-large w3-center"><b>
+				    {% if username %}
+				        <a href="/logout">{{username}}</a>
+				    {% else %}
+				        <a href="/login">Login</a>
+				    {% endif %}
+				    </b></li>
+				<li class="w3-col s1 biasless-dropdown w3-xlarge w3-center">
+					<a href="#" class="biasless-dropbtn">menu</a>
+					<div class="biasless-dropdown-content w3-border">
+						<a href="#">Link 1</a>
+						<a href="#">Link 2</a>
+						<a href="#">Link 3</a>
+					</div>
+				</li>
+				
+			</ul>
+		</div>
+		
+		<div id="content">
+		{% block content %}
+		{% endblock %}
+		</div>
+	</body>
+
+</html>

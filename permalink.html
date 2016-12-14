@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+
+<div class="biasless-post">
+    
+    <!-- Container for a post body -->
+    <div class="biasless-content">
+        
+        <!-- Header for a post -->
+        <div class="biasless-post-heading">
+            <div class="biasless-post-date">
+                <span>{{post.created.strftime("%b %d, %Y")}}</span>
+            </div>
+            <div class="biasless-post-id">
+                <span>{{post.key().id()}}</span>
+            </div>
+            <div class="biasless-post-title">
+                {{post.title}}
+            </div>
+        </div>
+        
+        <!-- Controls for slides -->
+        <div class="biasless-colorbar w3-center w3-display-container" id="biasless-grad1" >
+            <div class="biasless-card-leftarrow w3-padding-left biasless-hover-text-white" onclick="plusDivs(-1)">&#10094;
+            </div>
+            <div class="biasless-card-rightarrow w3-padding-right biasless-hover-text-white" onclick="plusDivs(1)">&#10095;
+            </div>
+            <span class="w3-badge demo biasless-border biasless-black biasless-hover-white biasless-location1" onclick="currentDiv(1)"></span>
+            <span class="w3-badge demo biasless-border biasless-black biasless-hover-white biasless-location2" onclick="currentDiv(2)"></span>
+            <span class="w3-badge demo biasless-border biasless-black biasless-hover-white biasless-location3" onclick="currentDiv(3)"></span>
+            <span class="w3-badge demo biasless-border biasless-black biasless-hover-white biasless-location4" onclick="currentDiv(4)"></span>
+            <span class="w3-badge demo biasless-border biasless-black biasless-hover-white biasless-location5" onclick="currentDiv(5)"></span>
+            <span class="w3-badge demo biasless-border biasless-black biasless-hover-white biasless-location6" onclick="currentDiv(6)"></span>
+        </div>
+        
+        <!-- Slides -->
+		<div class="biasless-card mySlides">
+			<header class="biasless-card-title">
+				<a href = "{{post.link_NewYorker}}">{{post.title_NewYorker}}</a>
+			</header>
+			
+			<div class="biasless-card-image">
+				<a href = "{{post.link_NewYorker}}">
+					<img style="max-width:100%" src="{{post.image_NewYorker}}" alt="{{post.image_NewYorker}}">
+				</a>
+			</div>
+            
+            <footer class="biasless-card-footer">
+                <span>The New Yorker</span><br>
+                <span>Biased to the Right:</span><br>
+                <span>Biased to the Left:</span><br>
+                <span>Unbiased:</span>
+            </footer>
+		</div>
+		
+		<div class="biasless-card mySlides">
+			<header class="biasless-card-title">
+				<a href = "{{post.link_NYT}}">{{post.title_NYT}}</a>
+			</header>
+			
+			<div class="biasless-card-image">
+				<a href = "{{post.link_NYT}}">
+					<img style="max-width:100%" src="{{post.image_NYT}}" alt="{{post.image_NYT}}">
+				</a>
+			</div>
+            
+            <footer class="biasless-card-footer">
+                <span>The New York Times</span><br>
+                <span>Biased to the Right:</span><br>
+                <span>Biased to the Left:</span><br>
+                <span>Unbiased:</span>
+            </footer>
+		</div>
+		
+		<div class="biasless-card mySlides">
+			<header class="biasless-card-title">
+				<a href = "{{post.link_Huffington}}">{{post.title_Huffington}}</a>
+			</header>
+			
+			<div class="biasless-card-image">
+				<a href = "{{post.link_Huffington}}">
+					<img style="max-width:100%" src="{{post.image_Huffington}}" alt="{{post.image_Huffington}}">
+				</a>
+			</div>
+            
+            <footer class="biasless-card-footer">
+                <span>The Huffington Post</span><br>
+                <span>Biased to the Right:</span><br>
+                <span>Biased to the Left:</span><br>
+                <span>Unbiased:</span>
+            </footer>
+		</div>
+		
+		<div class="biasless-card mySlides">
+			<header class="biasless-card-title">
+				<a href = "{{post.link_CNN}}">{{post.title_CNN}}</a>
+			</header>
+			
+			<div class="biasless-card-image">
+				<a href = "{{post.link_CNN}}">
+					<img style="max-width:100%" src="{{post.image_CNN}}" alt="{{post.image_CNN}}">
+				</a>
+			</div>
+            
+            <footer class="biasless-card-footer">
+                <span>CNN</span><br>
+                <span>Biased to the Right:</span><br>
+                <span>Biased to the Left:</span><br>
+                <span>Unbiased:</span>
+            </footer>
+		</div>
+		
+		<div class="biasless-card mySlides">
+			<header class="biasless-card-title">
+				<a href = "{{post.link_Fox}}">{{post.title_Fox}}</a>
+			</header>
+			
+			<div class="biasless-card-image">
+				<a href = "{{post.link_Fox}}">
+					<img style="max-width:100%" src="{{post.image_Fox}}" alt="{{post.image_Fox}}">
+				</a>
+			</div>
+            
+            <footer class="biasless-card-footer">
+                <span>Fox News</span><br>
+                <span>Biased to the Right:</span><br>
+                <span>Biased to the Left:</span><br>
+                <span>Unbiased:</span>
+            </footer>
+		</div>
+		
+		<div class="biasless-card mySlides">
+			<header class="biasless-card-title">
+				<a href = "{{post.link_CNN}}">{{post.title_Breitbart}}</a>
+			</header>
+			
+			<div class="biasless-card-image">
+				<a href = "{{post.link_CNN}}">
+					<img style="max-width:100%" src="{{post.image_Breitbart}}" alt="{{post.image_Breitbart}}">
+				</a>
+			</div>
+            
+            <footer class="biasless-card-footer">
+                <span>Breitbart</span><br>
+                <span>Biased to the Right:</span><br>
+                <span>Biased to the Left:</span><br>
+                <span>Unbiased:</span>
+            </footer>
+		</div>
+        
+    </div>
+        
+    <!-- End of the container -->
+		
+    <!-- Container for comments -->
+    <div class="biasless-comments">
+        <table style="width:100%">
+            <caption>Comments</caption>
+            {% for c in comments %}
+            <tr>
+                <th style="width:50%">{{ c.username }}</th>
+                <td style="width:50%">{{ c.created.strftime("%c") }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><div class="biasless-comment-bottom">{{ c.comment }}</div></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <!-- Form for a new comment -->
+
+    <div class="biasless-newcomments">
+        <p>
+        <h3>Submit your comment</h3>
+        </p>
+        
+        <form class="biasless-form" method="post">
+            <p>
+            <label class="biasless-form">username</label>
+            <input class="biasless-form" type="text" name="username" value="{{username}}">
+            </p>
+            <p>
+            <label class="biasless-form">comment</label>
+            <input class="biasless-form" type="text" name="comment" value="{{comment}}">
+            </p>
+                        
+            <div class="error">{{error}}</div>
+                        
+            <input class="biasless-form" type="submit">
+                            
+        </form>
+    </div>
+    
+</div>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1;}
+  if (n < 1) {slideIndex = x.length;}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace("biasless-black", "biasless-transparent");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className = dots[slideIndex-1].className.replace("biasless-transparent", "biasless-black");
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="w3-content" style="width:80%">
+
+<div class="w3-container w3-blue">
+	<h2>Input Form</h2>
+</div>
+
+<div class="w3-container">{{error}}</div>
+  	
+<form class="w3-container" method="post">
+	<p>
+  		<label>Title</label>
+  		<input class="w3-input" type="text" name="title" value="{{title}}">
+  	</p>
+
+	<p>
+  		<div class="w3-container">
+			<h4><a href="http://www.newyorker.com">New Yorker</a></h4>
+		</div>
+	</p>
+	<p>
+  		<label>Title</label>
+  		<input class="w3-input" type="text" name="title_NewYorker" value="{{title_NewYorker}}">
+  	</p>
+	<p>
+  		<label>Link</label>
+  		<input class="w3-input" type="text" name="link_NewYorker" value="{{link_NewYorker}}">
+  	</p>
+  	<p>
+  		<label>Image</label>
+  		<input class="w3-input" type="text" name="image_NewYorker" value="{{image_NewYorker}}">
+  	</p>
+  	
+  	<p>
+  		<div class="w3-container">
+			<h4><a href="http://www.nytimes.com">New York Times</a></h4>
+		</div>
+	</p>
+	<p>
+  		<label>Title</label>
+  		<input class="w3-input" type="text" name="title_NYT" value="{{title_NYT}}">
+  	</p>
+	<p>
+  		<label>Link</label>
+  		<input class="w3-input" type="text" name="link_NYT" value="{{link_NYT}}">
+  	</p>
+  	<p>
+  		<label>Image</label>
+  		<input class="w3-input" type="text" name="image_NYT" value="{{image_NYT}}">
+  	</p>
+  	
+  	<p>
+  		<div class="w3-container">
+			<h4><a href="http://www.huffingtonpost.com">Huffington Post</a></h4>
+		</div>
+	</p>
+	<p>
+  		<label>Title</label>
+  		<input class="w3-input" type="text" name="title_Huffington" value="{{title_Huffington}}">
+  	</p>
+	<p>
+  		<label>Link</label>
+  		<input class="w3-input" type="text" name="link_Huffington" value="{{link_Huffington}}">
+  	</p>
+  	<p>
+  		<label>Image</label>
+  		<input class="w3-input" type="text" name="image_Huffington" value="{{image_Huffington}}">
+  	</p>
+  	
+  	<p>
+  		<div class="w3-container">
+			<h4><a href="http://www.cnn.com">CNN</a></h4>
+		</div>
+	</p>
+	<p>
+  		<label>Title</label>
+  		<input class="w3-input" type="text" name="title_CNN" value="{{title_CNN}}">
+  	</p>
+	<p>
+  		<label>Link</label>
+  		<input class="w3-input" type="text" name="link_CNN" value="{{link_CNN}}">
+  	</p>
+  	<p>
+  		<label>Image</label>
+  		<input class="w3-input" type="text" name="image_CNN" value="{{image_CNN}}">
+  	</p>
+  	
+  	<p>
+  		<div class="w3-container">
+			<h4><a href="http://www.foxnews.com">Fox News</a></h4>
+		</div>
+	</p>
+	<p>
+  		<label>Title</label>
+  		<input class="w3-input" type="text" name="title_Fox" value="{{title_Fox}}">
+  	</p>
+	<p>
+  		<label>Link</label>
+  		<input class="w3-input" type="text" name="link_Fox" value="{{link_Fox}}">
+  	</p>
+  	<p>
+  		<label>Image</label>
+  		<input class="w3-input" type="text" name="image_Fox" value="{{image_Fox}}">
+  	</p>
+  	
+  	<p>
+  		<div class="w3-container">
+			<h4><a href="http://www.breitbart.com">Breitbart</a></h4>
+		</div>
+	</p>
+	<p>
+  		<label>Title</label>
+  		<input class="w3-input" type="text" name="title_Breitbart" value="{{title_Breitbart}}">
+  	</p>
+	<p>
+  		<label>Link</label>
+  		<input class="w3-input" type="text" name="link_Breitbart" value="{{link_Breitbart}}">
+  	</p>
+  	<p>
+  		<label>Image</label>
+  		<input class="w3-input" type="text" name="image_Breitbart" value="{{image_Breitbart}}">
+  	</p>
+
+	<input type="submit">
+		
+</form>
+
+<div>
+
+{% endblock %}
