@@ -240,9 +240,18 @@ input[type=submit].biasless-form {
 
 .biasless-container {
 	width: 100%;
-	height: 1.5em;
+	height: 3.0em;
 	position: relative;
 	background-color: #f1f1f1;
+}
+
+/* Top Menu */
+
+.biasless-topmenu {
+    width: 100%;
+    height: 3.0em;
+    position: relative;
+    background-color: #f1f1f1;
 }
 
 .biasless-navbar {
@@ -259,11 +268,17 @@ input[type=submit].biasless-form {
 .biasless-navbar li a, .biasless-dropbtn {
 	display: block;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 1em 1em;
 }
 
 .biasless-navbar li a:hover, .biasless-dropdown:hover .biasless-dropbtn {
-	background-color: red;
+	background-color: white;
+}
+
+.biasless-error {
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
 }
 
 .biasless-dropdown {
@@ -291,4 +306,60 @@ input[type=submit].biasless-form {
 
 .biasless-dropdown-content a:hover {
 	background-color: #f1f1f1;
+}
+
+/* Signup */
+.biasless-signup {
+    position: relative;
+    padding: 1em;
+    margin: auto;
+    width: 400px;
+    box-shadow:0 2px 4px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)!important;
+}
+
+.biasless-signup .header {
+    text-align: center;
+    display: block;
+    padding: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.biasless-signup .table {
+    position: relative;
+    padding: 1em;
+    margin: auto;
+    width: 100%;
+}
+
+.biasless-signup .label {
+    font-size: 1em;
+}
+
+/* Login */
+.biasless-login {
+    position: relative;
+    padding: 1em;
+    margin: auto;
+    width: 400px;
+    box-shadow:0 2px 4px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)!important;
+}
+
+.biasless-login .header {
+    text-align: center;
+    display: block;
+    padding: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.biasless-login .table {
+    position: relative;
+    padding: 1em;
+    margin: auto;
+    width: 100%;
+}
+
+.biasless-signup .label {
+    font-size: 1em;
 }
