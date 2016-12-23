@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br><br>
+
+<div class="biasless-post">
+    
+    <!-- Container for a post body -->
+    <div class="biasless-content">
+        
+        <!-- Header for a post -->
+        <div class="biasless-post-heading">
+            <div class="biasless-post-date">
+                <span>{{article.created.strftime("%b %d, %Y")}}</span>
+            </div>
+            <div class="biasless-post-id">
+                <span>{{article.key().id()}}</span>
+            </div>
+            <div class="biasless-post-title">
+                <a href="{{article.link}}">{{article.title}}</a>
+            </div>
+            <div class="biasless-card-image">
+                <a href = "{{article.link}}">
+                    <img style="max-width:100%" src="{{article.image}}" alt="{{article.image}}">
+                </a>
+            </div>
+            <div class="biasless-card-footer">
+                <span>{{article.source}}</span><br>
+                <span>{{article.description}}</span><br>
+                <span>Biased to the Right:</span><br>
+                <span>Biased to the Left:</span><br>
+                <span>Unbiased:</span>
+            </div>
+        </div>
+    </div>
+		
+    <!-- Container for comments -->
+    <div class="biasless-comments">
+        <table style="width:100%">
+            <caption>Comments</caption>
+            {% for c in comments2 %}
+            <tr>
+                <th style="width:50%">{{ c.username }}</th>
+                <td style="width:50%">{{ c.created.strftime("%c") }}</td>
+            </tr>
+            <tr>
+                <td colspan="2"><div class="biasless-comment-bottom">{{ c.comment }}</div></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    
+    <!-- Form for a new comment -->
+
+    <div class="biasless-newcomments">
+        <p>
+        <h3>Submit your comment</h3>
+        </p>
+        
+        <form class="biasless-form" method="post">
+            <p>
+            <label class="biasless-form">username</label>
+            <input class="biasless-form" type="text" name="username" value="{{username}}">
+            </p>
+            <p>
+            <label class="biasless-form">comment</label>
+            <input class="biasless-form" type="text" name="comment" value="{{comment}}">
+            </p>
+                        
+            <div class="error">{{error}}</div>
+                        
+            <input class="biasless-form" type="submit">
+                            
+        </form>
+    </div>
+    
+</div>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function currentDiv(n) {
+  showDivs(slideIndex = n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("demo");
+  if (n > x.length) {slideIndex = 1;}
+  if (n < 1) {slideIndex = x.length;}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+     dots[i].className = dots[i].className.replace("biasless-black", "biasless-transparent");
+  }
+  x[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className = dots[slideIndex-1].className.replace("biasless-transparent", "biasless-black");
+}
+</script>
+
+{% endblock %}

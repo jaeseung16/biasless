@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<br><br>
+
+<div class="biasless-post">
+	
+	{% for article in articles %}
+    <!-- Container for a post body -->
+    <div class="biasless-content">
+        
+        <!-- Header for a post -->
+        <div class="biasless-post-heading">
+            <div class="biasless-post-date">
+                <span>{{article.created.strftime("%b %d, %Y")}}</span>
+            </div>
+            <div class="biasless-post-id">
+                <span>{{article.key().id()}}</span>
+            </div>
+            <div class="biasless-post-title">
+                <a href="article/{{article.key().id()}}">{{article.title}}</a>
+            </div>
+            <div class="biasless-card-image">
+                <a href = "{{article.link}}">
+                    <img style="max-width:100%" src="{{article.image}}" alt="{{article.image}}">
+                </a>
+            </div>
+            <div class="biasless-card-footer">
+                <span>{{article.source}}</span><br>
+                <span>{{article.description}}</span><br>
+                <span>Biased to the Right:</span><br>
+                <span>Biased to the Left:</span><br>
+                <span>Unbiased:</span>
+            </div>
+        </div>
+
+    </div>
+    <br><br>
+    {% endfor %}
+
+</div>
+
+
+{% endblock %}
