@@ -3,41 +3,53 @@
 {% block content %}
 <br><br>
 
-<div class="biasless-post">
+<div class="biasless-article">
     
-    <!-- Container for a post body -->
+    <!-- Container for an article body -->
     <div class="biasless-content">
-        
-        <!-- Header for a post -->
-        <div class="biasless-post-heading">
-            <div class="biasless-post-date">
-                <span>{{article.created.strftime("%b %d, %Y")}}</span>
+        <div class="biasless-article-heading">
+            <div class="biasless-article-date">
+                {{article.created.strftime("%b %d, %Y")}}
             </div>
-            <div class="biasless-post-id">
-                <span>{{article.key().id()}}</span>
-            </div>
-            <div class="biasless-post-title">
-                <a href="{{article.url}}">{{article.title}}</a>
-            </div>
-            <div class="biasless-card-image">
-                <a href = "{{article.url}}">
-                    <img style="max-width:100%" src="{{article.image}}" alt="{{article.image}}">
-                </a>
-            </div>
-            <div class="biasless-card-footer">
-                <span>{{article.source}}</span><br>
-                <span>{{article.description}}</span><br>
-                <span>Biased to the Right:</span><br>
-                <span>Biased to the Left:</span><br>
-                <span>Unbiased:</span>
+            
+            <div class="biasless-article-id">
+                {{article.key().id()}}
             </div>
         </div>
+        
+        <div class="biasless-article-title">
+            <a href="{{article.key().id()}}">{{article.title}}</a>
+        </div>
+        
+        <div class="biasless-article-image">
+            <a href = "{{article.url}}">
+                <img src="{{article.image}}" alt="{{article.image}}">
+                    </a>
+        </div>
+        
+        <div class="biasless-article-source">
+            From: {{article.source}}
+        </div>
+        
+        <div class="biasless-article-description">
+            
+            {{article.description}}
+        </div>
+        
+        <div class="biasless-article-footer" id="score">
+            Bias Score: {{article.score}}<br>
+            {% if score %}
+            You gave {{ score.score }} at {{ score.created.strftime("%c") }}
+            {% endif %}
+        </div>
+        
     </div>
+
 		
     <!-- Container for comments -->
     <div class="biasless-comments">
         <table style="width:100%">
-            <caption>Comments</caption>
+            <caption>Comments ({{no_comments}})</caption>
             {% for c in comments2 %}
             <tr>
                 <th style="width:50%">{{ c.username }}</th>
@@ -49,6 +61,19 @@
             {% endfor %}
         </table>
     </div>
+    
+    
+    <div class="biasless-score">
+        <form>
+        <p>
+        <label class="biasless-form">your score</label>
+        <input class="biasless-form" type="range" name="score" min="-5" max="5" step="1" onchange="showValue(this.value)" value="{{score.score}}">
+            <span id="range">{{score.score}}</span>
+        </p>
+        <button type="button" onclick="loadDoc()">Give your score</button>
+        </form>
+    </div>
+
     
     <!-- Form for a new comment -->
 
@@ -77,31 +102,23 @@
 </div>
 
 <script>
-var slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-  showDivs(slideIndex += n);
+function showValue(newValue) {
+    document.getElementById("range").innerHTML = newValue;
 }
 
-function currentDiv(n) {
-  showDivs(slideIndex = n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("demo");
-  if (n > x.length) {slideIndex = 1;}
-  if (n < 1) {slideIndex = x.length;}
-  for (i = 0; i < x.length; i++) {
-     x[i].style.display = "none";
-  }
-  for (i = 0; i < dots.length; i++) {
-     dots[i].className = dots[i].className.replace("biasless-black", "biasless-transparent");
-  }
-  x[slideIndex-1].style.display = "block";
-  dots[slideIndex-1].className = dots[slideIndex-1].className.replace("biasless-transparent", "biasless-black");
+function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    var score = document.getElementById("range")
+    var params = "username={{username}}&score="+score.innerHTML;
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("score").innerHTML = this.responseText;
+        }
+    };
+    
+    xhttp.open("POST", "/score/{{article.key().id()}}", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(params);
 }
 </script>
 

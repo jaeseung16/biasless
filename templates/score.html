@@ -1,0 +1,4 @@
+Bias Score: {{article.score}}<br>
+{% if score %}
+You gave {{ score.score }} at {{ score.created.strftime("%c") }}
+{% endif %}
