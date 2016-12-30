@@ -13,7 +13,9 @@ class NewsArticle(db.Model):
     url = db.LinkProperty(required = True)
     image = db.LinkProperty(required = True)
     description = db.StringProperty()
-    score = db.FloatProperty()
+    score = db.StringProperty(required = True)
+    total_score = db.FloatProperty(required = True)
+    no_scored = db.IntegerProperty(required = True)
 
     def as_dict(self):
         time_fmt = '%c'

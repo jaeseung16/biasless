@@ -12,6 +12,7 @@ from datetime import datetime, timedelta
 
 from User import *
 from Post import *
+from Comment import *
 from Comment2 import *
 from NewsArticle import *
 
@@ -62,6 +63,9 @@ def comment2_key(name = 'default'):
 
 def article_key(name = 'default'):
     return db.Key.from_path('articles', name)
+
+def score_key(name = 'default'):
+    return db.Key.from_path('scores', name)
 
 
 # Memcache stuff
@@ -142,7 +146,7 @@ def get_articles(update = False):
     articles, age = age_get(mc_key)
     
     if update or articles is None:
-        query = NewsArticle.all().order('-created').fetch(limit=12)
+        query = NewsArticle.all().order('-created').fetch(limit=30)
         articles = list(query)
         
         if len(articles) == 0:
@@ -184,7 +188,7 @@ def read_from_example2():
         for article in articles:
             a = NewsArticle(parent = article_key(), title = article['title'],
                             source = source, url = article['url'], image = article['urlToImage'],
-                            description = article['description'], score = 0.0)
+                            description = article['description'], score = '0.00', total_score = 0.0, no_scored = 0)
             add_article(a)
                 
     articles, age = get_articles()

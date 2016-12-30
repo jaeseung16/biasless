@@ -1,8 +1,5 @@
 from BaseHandler import *
 
-from User import *
-from Post import *
-
 # Handler for the main page
 class MainPage2(Handler):
     def get(self):
