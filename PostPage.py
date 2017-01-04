@@ -52,7 +52,7 @@ class PostPage(Handler):
                 comment = self.request.get("comment")
                 
                 if comment:
-                    c = Comment(parent = comment_key(), user_id = str(self.user.key().id()), username = username, post_id = str(post.key.integer_id()), comment = comment)
+                    c = Comment(parent = comment_key(), user_id = str(self.user.key.integer_id()), username = username, post_id = str(post.key.integer_id()), comment = comment)
                     add_comment(c)
                 
                 else:

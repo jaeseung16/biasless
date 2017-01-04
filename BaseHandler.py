@@ -37,7 +37,7 @@ def check_secure_val(secure_val):
 
 # User stuff
 def users_key(group = 'default'):
-    return db.Key.from_path('users', group)
+    return ndb.Key('users', group)
 
 def make_salt(length = 5):
     return ''.join(random.choice(letters) for x in xrange(length))
@@ -227,7 +227,7 @@ class Handler(webapp2.RequestHandler):
         return cookie_val and check_secure_val(cookie_val)
     
     def login(self, user):
-        self.set_secure_cookie('user_id', str(user.key().id()))
+        self.set_secure_cookie('user_id', str(user.key.integer_id()))
     
     def logout(self):
         self.response.headers.add_header('Set-Cookie', 'user_id=; Path=/')
@@ -235,7 +235,7 @@ class Handler(webapp2.RequestHandler):
     def initialize(self, *a, **kw):
         webapp2.RequestHandler.initialize(self, *a, **kw)
         uid = self.read_secure_cookie('user_id')
-        self.user = uid and User.by_id(int(uid))
+        self.user = uid and User._by_id(int(uid))
         
         if self.request.url.endswith('.json'):
             self.format = 'json'

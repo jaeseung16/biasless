@@ -3,11 +3,11 @@ import random
 
 from string import letters
 
-from google.appengine.ext import db
+from google.appengine.ext import ndb
 
 # User stuff
 def users_key(group = 'default'):
-    return db.Key.from_path('users', group)
+    return ndb.Key('users', group)
     
 def make_salt(length = 5):
     return ''.join(random.choice(letters) for x in xrange(length))
@@ -23,20 +23,20 @@ def valid_pw(name, password, h):
     return h == make_pw_hash(name, password, salt)
 
 # Class for User
-class User(db.Model):
-    name = db.StringProperty(required = True)
-    pw_hash = db.StringProperty(required = True)
-    email = db.StringProperty()
-    created = db.DateTimeProperty(auto_now_add = True)
-    score = db.IntegerProperty()
+class User(ndb.Model):
+    name = ndb.StringProperty(required = True)
+    pw_hash = ndb.StringProperty(required = True)
+    email = ndb.StringProperty()
+    created = ndb.DateTimeProperty(auto_now_add = True)
+    score = ndb.IntegerProperty()
     
     @classmethod
-    def by_id(cls, uid):
+    def _by_id(cls, uid):
     	return User.get_by_id(uid, parent = users_key())
     	
     @classmethod
-    def by_name(cls, name):
-        return User.all().filter('name =', name).get()
+    def _by_name(cls, name):
+        return User.query().filter(cls.name == name).get()
     
     @classmethod
     def register(cls, name, pw, email = None):
@@ -45,6 +45,6 @@ class User(db.Model):
     	
     @classmethod
     def login(cls, name, pw):
-        u = cls.by_name(name)
+        u = cls._by_name(name)
         if u and valid_pw(name, pw, u.pw_hash):
             return u

@@ -11,7 +11,7 @@ class ArticlePage(Handler):
         article, age = age_get(articlekey)
 
         if self.user:
-            user_id = str(self.user.key().id())
+            user_id = str(self.user.key.integer_id())
             scorekey = 'SCORE_' + article_id + '_' + user_id
             score, age_score = age_get(scorekey)
             # Add here to deal with the case when score is None.
@@ -59,7 +59,7 @@ class ArticlePage(Handler):
                 logging.warning('Score %s' % score)
                 
                 if comment2:
-                    c = Comment2(parent = comment2_key(), user_id = str(self.user.key().id()), username = username, article_id = article_id, comment = comment2)
+                    c = Comment2(parent = comment2_key(), user_id = str(self.user.key.integer_id()), username = username, article_id = article_id, comment = comment2)
                     add_comment2(c)
                 
                 else:

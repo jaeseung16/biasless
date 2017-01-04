@@ -39,7 +39,7 @@ class Signup(Handler):
             self.done()
 
     def done(self):
-        u = User.by_name(self.username)
+        u = User._by_name(self.username)
         if u:
             msg = "The user already exists."
             self.render("signup-form.html", error_username = msg)

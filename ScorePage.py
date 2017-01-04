@@ -19,7 +19,7 @@ class ScorePage(Handler):
         if self.user:
             username = self.request.get("username")
             score = self.request.get("score")
-            user_id = str(self.user.key().id())
+            user_id = str(self.user.key.integer_id())
 
             article = NewsArticle.get_by_id(id = long(article_id), parent = article_key())
             article.total_score += float(score)
