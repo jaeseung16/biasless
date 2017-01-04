@@ -15,6 +15,7 @@ from Post import *
 from Comment import *
 from Comment2 import *
 from NewsArticle import *
+from Score import *
 
 # Set the template folder
 template_dir = os.path.join( os.path.dirname(__file__), 'templates')
@@ -53,19 +54,19 @@ def valid_pw(name, password, h):
 
 # Key stuff
 def post_key(name = 'default'):
-    return db.Key.from_path('posts', name)
+    return ndb.Key('posts', name)
 
 def comment_key(name = 'default'):
-    return db.Key.from_path('comments', name)
+    return ndb.Key('comments', name)
 
 def comment2_key(name = 'default'):
-    return db.Key.from_path('comments2', name)
+    return ndb.Key('comments2', name)
 
 def article_key(name = 'default'):
-    return db.Key.from_path('articles', name)
+    return ndb.Key('articles', name)
 
 def score_key(name = 'default'):
-    return db.Key.from_path('scores', name)
+    return ndb.Key('scores', name)
 
 
 # Memcache stuff
@@ -75,24 +76,25 @@ def age_set(key, val):
 
 def age_get(key):
     r = memcache.get(key)
+    
     if r:
         val, save_time = r
         age = (datetime.utcnow() - save_time).total_seconds()
     else:
         val, age = None, 0
-    
+
     return val, age
 
 def get_posts(update = False):
-    mc_key = 'Post'
+    mc_key = 'Posts'
     posts, age = age_get(mc_key)
     
     if update or posts is None:
-        query = Post.all().order('-created').fetch(limit=12)
+        query = Post.query().order(-Post.created).fetch(limit=12)
         posts = list(query)
         
         if len(posts) == 0:
-            posts, age = read_from_example()
+            posts = read_from_example()
         
         age_set(mc_key, posts)
     
@@ -104,30 +106,35 @@ def add_post(post):
     return str(post.key().id())
 
 def get_comments(post_id, update = False):
-    mc_key = 'Comment_' + post_id
+    mc_key = 'Comments_' + post_id
     comments, age = age_get(mc_key)
     
     if update or comments is None:
-        query = Comment.all().filter('post_id =', post_id).order('-created').fetch(limit=10)
-        comments = list(query)
-        age_set(mc_key, comments)
-    
+        query = Comment.query().filter(Comment.post_id == post_id).order(-Comment2.created).fetch(limit=10)
+                                       
+        if query:
+            comments = list(query)
+            age_set(mc_key, comments)
+            logging.warning('There are comments.')
+        else:
+            comments = None
+            logging.warning('There is no comments.')
+
     return comments, age
 
 def add_comment(comment):
+    logging.warning('Comment added')
     comment.put()
-    mc_key = 'Comment_' + comment.post_id
-    memcache.delete(mc_key)
-    # get_comments(post_id = comment.post_id, update = True)
+    get_comments(post_id = comment.post_id, update = True)
     
-    return str(comment.key().id())
+    return str(comment.key.integer_id())
 
 def get_comments2(article_id, update = False):
     mc_key = 'Comment2_' + article_id
     comments2, age = age_get(mc_key)
     
     if update or comments2 is None:
-        query = Comment2.all().filter('article_id =', article_id).order('-created').fetch(limit=10)
+        query = Comment2.query().filter(Comment2.article_id == article_id).order(-Comment2.created).fetch(limit=10)
         comments2 = list(query)
         age_set(mc_key, comments2)
     
@@ -135,22 +142,20 @@ def get_comments2(article_id, update = False):
 
 def add_comment2(comment2):
     comment2.put()
-    mc_key = 'Comment2_' + comment2.article_id
-    memcache.delete(mc_key)
-    # get_comments(post_id = comment.post_id, update = True)
+    get_comments2(article_id = comment2.article_id, update = True)
     
-    return str(comment2.key().id())
+    return str(comment2.key.integer_id())
 
 def get_articles(update = False):
-    mc_key = 'NewsArticle'
+    mc_key = 'NewsArticles'
     articles, age = age_get(mc_key)
     
     if update or articles is None:
-        query = NewsArticle.all().order('-created').fetch(limit=30)
+        query = NewsArticle.query().order(-NewsArticle.created).fetch(limit=30)
         articles = list(query)
         
         if len(articles) == 0:
-            articles, age = read_from_example2()
+            articles = read_from_example2()
         
         age_set(mc_key, articles)
     
@@ -159,9 +164,11 @@ def get_articles(update = False):
 def add_article(article):
     article.put()
     get_articles(update = True)
-    return str(article.key().id())
+    return str(article.key.integer_id())
 
 def read_from_example():
+    posts = []
+    
     for p in example_posts:
         post = Post(parent = post_key(), title = p['title'],
                     title_NYT = p['NewYorkTimes']['title'], link_NYT = p['NewYorkTimes']['link'], image_NYT = p['NewYorkTimes']['image'],
@@ -169,15 +176,15 @@ def read_from_example():
                     title_CNN = p['CNN']['title'], link_CNN = p['CNN']['link'], image_CNN = p['CNN']['image'],
                     title_Fox = p['FoxNews']['title'], link_Fox = p['FoxNews']['link'], image_Fox = p['FoxNews']['image'],
                     title_Breitbart = p['Breitbart']['title'], link_Breitbart = p['Breitbart']['link'], image_Breitbart = p['Breitbart']['image'])
-        add_post(post)
+        post.put()
+        posts.append(post)
     
-    posts, age = get_posts()
-    
-    return posts, age
+    return posts
 
 def read_from_example2():
     key = '779097b9e35e46b0ac3db6fc358afced'
     sources = ['the-new-york-times', 'the-huffington-post', 'cnn']
+    newsarticles = []
     
     for source in sources:
         url = "https://newsapi.org/v1/articles?source=%s&apiKey=%s" % (source, key)
@@ -189,11 +196,10 @@ def read_from_example2():
             a = NewsArticle(parent = article_key(), title = article['title'],
                             source = source, url = article['url'], image = article['urlToImage'],
                             description = article['description'], score = '0.00', total_score = 0.0, no_scored = 0)
-            add_article(a)
-                
-    articles, age = get_articles()
+            a.put()
+            newsarticles.append(a)
     
-    return articles, age
+    return newsarticles
 
 # Handler
 class Handler(webapp2.RequestHandler):

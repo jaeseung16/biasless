@@ -2,15 +2,15 @@ import logging
 import json
 import urllib2
 
-from google.appengine.ext import db
+from google.appengine.ext import ndb
 
 # Class for Comment
 
-class Score(db.Model):
-    created = db.DateTimeProperty(auto_now_add = True)
-    user_id = db.StringProperty(required = True)
-    article_id = db.StringProperty(required = True)
-    score = db.FloatProperty(required = True)
+class Score(ndb.Model):
+    created = ndb.DateTimeProperty(auto_now_add = True)
+    user_id = ndb.StringProperty(required = True)
+    article_id = ndb.StringProperty(required = True)
+    score = ndb.FloatProperty(required = True)
 
     def as_dict(self):
         time_fmt = '%c'

@@ -14,11 +14,12 @@ class ArticlePage(Handler):
             user_id = str(self.user.key().id())
             scorekey = 'SCORE_' + article_id + '_' + user_id
             score, age_score = age_get(scorekey)
+            # Add here to deal with the case when score is None.
             logging.warning('scorekey = %s' % score)
         
         if not article:
-            key = db.Key.from_path('NewsArticle', int(article_id), parent = article_key())
-            article = db.get(key)
+            key = ndb.Key('NewsArticle', int(article_id), parent = article_key())
+            article = key.get()
             age_set(articlekey, article)
             age = 0
             logging.warning('Score %s' % article.score)
@@ -29,7 +30,7 @@ class ArticlePage(Handler):
         elif self.format == 'html':
             comments2, age = get_comments2(article_id)
             logging.warning('Articlepage %s' % len(comments2))
-            logging.warning('set %s' % len(list(Comment2.all().filter('article_id =', article_id).order('-created').fetch(limit=10))) )
+            logging.warning('set %s' % len(list(Comment2.query().filter(Comment2.article_id == article_id).order(-Comment2.created).fetch(limit=10))) )
             logging.warning('Score %s' % article.score)
             
             if self.user:

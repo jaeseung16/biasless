@@ -11,8 +11,8 @@ class PostPage(Handler):
         post, age = age_get(postkey)
         
         if not post:
-            key = db.Key.from_path('Post', int(post_id), parent = post_key())
-            post = db.get(key)
+            key = ndb.Key('Post', int(post_id), parent = post_key())
+            post = key.get()
             age_set(postkey, post)
             age = 0
         
@@ -21,8 +21,12 @@ class PostPage(Handler):
             return
         elif self.format == 'html':
             comments, age = get_comments(post_id)
-            logging.warning('Postpage %s' % len(comments))
-            logging.warning('set %s' % len(list(Comment.all().filter('post_id =', post_id).order('-created').fetch(limit=10))) )
+            logging.warning('%s' % age)
+            #logging.warning('Postpage %s' % len(comments))
+            logging.warning('set %s' % len(list(Comment.query().filter(Comment.post_id == post_id).order(-Comment.created).fetch(limit=10))) )
+            
+            if comments == None:
+                comments = []
             
             if self.user:
                 self.render("permalink.html", post = post, username = self.user.name, comments = comments, error = error)
@@ -48,7 +52,7 @@ class PostPage(Handler):
                 comment = self.request.get("comment")
                 
                 if comment:
-                    c = Comment(parent = comment_key(), user_id = str(self.user.key().id()), username = username, post_id = str(post.key().id()), comment = comment)
+                    c = Comment(parent = comment_key(), user_id = str(self.user.key().id()), username = username, post_id = str(post.key.integer_id()), comment = comment)
                     add_comment(c)
                 
                 else:
