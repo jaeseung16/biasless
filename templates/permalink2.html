@@ -13,12 +13,12 @@
             </div>
             
             <div class="biasless-article-id">
-                {{article.key().id()}}
+                {{article.key.integer_id()}}
             </div>
         </div>
         
         <div class="biasless-article-title">
-            <a href="{{article.key().id()}}">{{article.title}}</a>
+            <a href="{{article.key.integer_id()}}">{{article.title}}</a>
         </div>
         
         <div class="biasless-article-image">
@@ -116,7 +116,7 @@ function loadDoc() {
         }
     };
     
-    xhttp.open("POST", "/score/{{article.key().id()}}", true);
+    xhttp.open("POST", "/score/{{article.key.integer_id()}}", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(params);
 }

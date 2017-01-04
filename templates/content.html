@@ -16,29 +16,29 @@
                 <span>{{post.created.strftime("%b %d, %Y")}}</span>
             </div>
             <div class="biasless-post-id">
-                <span>{{post.key().id()}}</span>
+                <span>{{post.key.integer_id()}}</span>
             </div>
             <div class="biasless-post-title">
-                <a href="post/{{post.key().id()}}">{{post.title}}</a>
+                <a href="post/{{post.key.integer_id()}}">{{post.title}}</a>
             </div>
         </div>
         
         <!-- Controls for slides -->
         <div class="biasless-colorbar w3-center w3-display-container" id="biasless-grad1" >
-            <div class="biasless-card-leftarrow w3-padding-left biasless-hover-text-white" onclick="plusDivs{{post.key().id()}}(-1)">&#10094;
+            <div class="biasless-card-leftarrow w3-padding-left biasless-hover-text-white" onclick="plusDivs{{post.key.integer_id()}}(-1)">&#10094;
             </div>
-            <div class="biasless-card-rightarrow w3-padding-right biasless-hover-text-white" onclick="plusDivs{{post.key().id()}}(1)">&#10095;
+            <div class="biasless-card-rightarrow w3-padding-right biasless-hover-text-white" onclick="plusDivs{{post.key.integer_id()}}(1)">&#10095;
             </div>
-            <span class="w3-badge dots{{post.key().id()}} biasless-border biasless-black biasless-hover-white biasless-location1" onclick="currentDiv{{post.key().id()}}(1)"></span>
-            <span class="w3-badge dots{{post.key().id()}} biasless-border biasless-black biasless-hover-white biasless-location2" onclick="currentDiv{{post.key().id()}}(2)"></span>
-            <span class="w3-badge dots{{post.key().id()}} biasless-border biasless-black biasless-hover-white biasless-location3" onclick="currentDiv{{post.key().id()}}(3)"></span>
-            <span class="w3-badge dots{{post.key().id()}} biasless-border biasless-black biasless-hover-white biasless-location4" onclick="currentDiv{{post.key().id()}}(4)"></span>
-            <span class="w3-badge dots{{post.key().id()}} biasless-border biasless-black biasless-hover-white biasless-location5" onclick="currentDiv{{post.key().id()}}(5)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location1" onclick="currentDiv{{post.key.integer_id()}}(1)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location2" onclick="currentDiv{{post.key.integer_id()}}(2)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location3" onclick="currentDiv{{post.key.integer_id()}}(3)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location4" onclick="currentDiv{{post.key.integer_id()}}(4)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location5" onclick="currentDiv{{post.key.integer_id()}}(5)"></span>
         </div>
         
         <!-- Slides -->
         
-        <div class="biasless-card mySlides{{post.key().id()}}">
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
             <header class="biasless-card-title">
                 <a href = "{{post.link_NYT}}">{{post.title_NYT}}</a>
             </header>
@@ -57,7 +57,7 @@
             </footer>
         </div>
         
-        <div class="biasless-card mySlides{{post.key().id()}}">
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
             <header class="biasless-card-title">
                 <a href = "{{post.link_Huffington}}">{{post.title_Huffington}}</a>
             </header>
@@ -76,7 +76,7 @@
             </footer>
         </div>
         
-        <div class="biasless-card mySlides{{post.key().id()}}">
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
             <header class="biasless-card-title">
                 <a href = "{{post.link_CNN}}">{{post.title_CNN}}</a>
             </header>
@@ -95,7 +95,7 @@
             </footer>
         </div>
         
-        <div class="biasless-card mySlides{{post.key().id()}}">
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
             <header class="biasless-card-title">
                 <a href = "{{post.link_Fox}}">{{post.title_Fox}}</a>
             </header>
@@ -114,7 +114,7 @@
             </footer>
         </div>
         
-        <div class="biasless-card mySlides{{post.key().id()}}">
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
             <header class="biasless-card-title">
                 <a href = "{{post.link_Breitbart}}">{{post.title_Breitbart}}</a>
             </header>
@@ -144,31 +144,31 @@
 <script>
 {% for post in posts %}
 
-var slideIndex{{post.key().id()}} = 1;
-showDivs{{post.key().id()}}(slideIndex{{post.key().id()}});
+var slideIndex{{post.key.integer_id()}} = 1;
+showDivs{{post.key.integer_id()}}(slideIndex{{post.key.integer_id()}});
 
-function plusDivs{{post.key().id()}}(n) {
-  showDivs{{post.key().id()}}(slideIndex{{post.key().id()}} += n);
+function plusDivs{{post.key.integer_id()}}(n) {
+  showDivs{{post.key.integer_id()}}(slideIndex{{post.key.integer_id()}} += n);
 }
 
-function currentDiv{{post.key().id()}}(n) {
-  showDivs{{post.key().id()}}(slideIndex{{post.key().id()}} = n);
+function currentDiv{{post.key.integer_id()}}(n) {
+  showDivs{{post.key.integer_id()}}(slideIndex{{post.key.integer_id()}} = n);
 }
 
-function showDivs{{post.key().id()}}(n) {
+function showDivs{{post.key.integer_id()}}(n) {
     var i;
-    var x = document.getElementsByClassName("mySlides{{post.key().id()}}");
-    var dots = document.getElementsByClassName("dots{{post.key().id()}}");
-    if (n > x.length) {slideIndex{{post.key().id()}} = 1;}
-    if (n < 1) {slideIndex{{post.key().id()}} = x.length;}
+    var x = document.getElementsByClassName("mySlides{{post.key.integer_id()}}");
+    var dots = document.getElementsByClassName("dots{{post.key.integer_id()}}");
+    if (n > x.length) {slideIndex{{post.key.integer_id()}} = 1;}
+    if (n < 1) {slideIndex{{post.key.integer_id()}} = x.length;}
     for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
     }
     for (i = 0; i < dots.length; i++) {
         dots[i].className = dots[i].className.replace("biasless-black", "biasless-transparent");
     }
-    x[slideIndex{{post.key().id()}}-1].style.display = "block";
-    dots[slideIndex{{post.key().id()}}-1].className = dots[slideIndex{{post.key().id()}}-1].className.replace("biasless-transparent", "biasless-black");
+    x[slideIndex{{post.key.integer_id()}}-1].style.display = "block";
+    dots[slideIndex{{post.key.integer_id()}}-1].className = dots[slideIndex{{post.key.integer_id()}}-1].className.replace("biasless-transparent", "biasless-black");
 }
 {% endfor %}
 

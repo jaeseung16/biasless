@@ -14,7 +14,7 @@
                 <span>{{post.created.strftime("%b %d, %Y")}}</span>
             </div>
             <div class="biasless-post-id">
-                <span>{{post.key().id()}}</span>
+                <span>{{post.key.integer_id()}}</span>
             </div>
             <div class="biasless-post-title">
                 {{post.title}}
