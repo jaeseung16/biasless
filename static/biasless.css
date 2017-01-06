@@ -1,3 +1,13 @@
+[class*="col-"]{
+    width: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    .col-1 {width: 33.3%;}
+    .col-2 {width: 66.6%;}
+    .col-3 {width: 100%;}
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -50,8 +60,8 @@ input[type=submit] {
 /* colorbar */
 .biasless-colorbar{
     position: relative;
-    margin: 1em 0em;
-    padding: 0.3em 0em;
+    width: 90%;
+    margin: auto;
 }
 
 .biasless-hover-white:hover {
@@ -113,21 +123,21 @@ input[type=submit] {
 /* post */
 .biasless-post {
     position: relative;
-    margin: 1em 1em;
-    padding: 1em 1em;
-    width: 450px;
+    width: auto;
 }
 
 .biasless-post-heading {
     position: relative;
-    width: 100%;
+    width: 90%;
+    margin: auto;
 /*    box-shadow:0 2px 4px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)!important; */
 }
 
 .biasless-post-title {
-    padding: 1em;
+    margin: auto;
+    padding: 1.5em 0em;
     text-align: center;
-    font-size: 2em;
+    font-size: 1.5em;
     font-weight: bold;
 }
 
@@ -147,20 +157,87 @@ input[type=submit] {
 
 .biasless-content {
     position: relative;
-    padding: 1em;
-    box-shadow:0 2px 4px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)!important;
+    min-height: 550px;
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,0.16)
+}
+ 
+.biasless-article {
+    position: relative;
+    width: auto;
+}
+ 
+.biasless-article-heading {
+    position: relative;
+    width: 90%;
+    padding: 0.5em 0.0em;
+    margin: auto;
+}
+
+.biasless-article-date {
+    float: right;
+    font-size: 1em;
+}
+ 
+.biasless-article-id {
+    float: left;
+    font-size: 1em;
+}
+ 
+.biasless-article-title {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    padding: 1em 0em;
+    text-align: left;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+ 
+.biasless-article-image {
+    position: relative;
+    padding: 0.5em 0.5em;
+    margin: auto;
+}
+
+.biasless-article-source {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    padding: 0.5em 0em;
+    text-align: left;
+}
+
+.biasless-article-description {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    padding: 0.5em 0em;
+    text-align: left;
+}
+
+.biasless-article-footer {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    padding: 0.5em 0em;
+    text-align: left;
 }
 
 /* card */
 .biasless-card {
     position: relative;
+    margin: auto;
+    width: 90%;
 /*    box-shadow:0 2px 4px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
 }
 
 .biasless-card-title {
     position: relative;
-    padding: 0.5em 0.5em;
-    font-size: 1.5em;
+    width: 90%;
+    margin: auto;
+    padding: 0.5em 0em;
+    text-align: left;
+    font-size: 1.3em;
     font-weight: bold;
 }
 
@@ -168,6 +245,14 @@ input[type=submit] {
     position: relative;
     padding: 0.5em 0.5em;
     margin: auto;
+}
+
+.biasless-card-footer {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    padding: 0.5em 0em;
+    text-align: left;
 }
 
 .biasless-card-bottom {
@@ -248,7 +333,7 @@ input[type=submit].biasless-form {
 /* Top Menu */
 
 .biasless-topmenu {
-    width: 100%;
+    width: auto;
     height: 3.0em;
     position: relative;
     background-color: #f1f1f1;
