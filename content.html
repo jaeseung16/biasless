@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="biasless-post">
+	
+	{% for post in posts %}
+    <!-- Container for a post body -->
+    <div class="biasless-content col-1" style="float:left; {% if loop.index0 is divisibleby 3 %} clear: both; {% endif %}">
+        
+        <!-- Header for a post -->
+        <div class="biasless-post-heading">
+            <div class="biasless-post-date">
+                <span>{{post.created.strftime("%b %d, %Y")}}</span>
+            </div>
+            <div class="biasless-post-id">
+                <span>{{post.key.integer_id()}}</span>
+            </div>
+            <div class="biasless-post-title">
+                <a href="post/{{post.key.integer_id()}}">{{post.title}}</a>
+            </div>
+        </div>
+        
+        <!-- Controls for slides -->
+        <div class="biasless-colorbar w3-center w3-display-container" id="biasless-grad1" >
+            <div class="biasless-card-leftarrow w3-padding-left biasless-hover-text-white" onclick="plusDivs{{post.key.integer_id()}}(-1)">&#10094;
+            </div>
+            <div class="biasless-card-rightarrow w3-padding-right biasless-hover-text-white" onclick="plusDivs{{post.key.integer_id()}}(1)">&#10095;
+            </div>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location1" onclick="currentDiv{{post.key.integer_id()}}(1)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location2" onclick="currentDiv{{post.key.integer_id()}}(2)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location3" onclick="currentDiv{{post.key.integer_id()}}(3)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location4" onclick="currentDiv{{post.key.integer_id()}}(4)"></span>
+            <span class="w3-badge dots{{post.key.integer_id()}} biasless-border biasless-black biasless-hover-white biasless-location5" onclick="currentDiv{{post.key.integer_id()}}(5)"></span>
+        </div>
+        
+        <!-- Slides -->
+        
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
+            <header class="biasless-card-title">
+                <a href = "{{post.link_NYT}}">{{post.title_NYT}}</a>
+            </header>
+            
+            <div class="biasless-card-image">
+                <a href = "{{post.link_NYT}}">
+                    <img style="max-width:100%" src="{{post.image_NYT}}" alt="{{post.image_NYT}}">
+                        </a>
+            </div>
+            
+            <footer class="biasless-card-footer">
+                <span>The New York Times</span><br>
+                <span>Bias Score:</span>
+            </footer>
+        </div>
+        
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
+            <header class="biasless-card-title">
+                <a href = "{{post.link_Huffington}}">{{post.title_Huffington}}</a>
+            </header>
+            
+            <div class="biasless-card-image">
+                <a href = "{{post.link_Huffington}}">
+                    <img style="max-width:100%" src="{{post.image_Huffington}}" alt="{{post.image_Huffington}}">
+                        </a>
+            </div>
+            
+            <footer class="biasless-card-footer">
+                <span>The Huffington Post</span><br>
+                <span>Bias Score:</span>
+            </footer>
+        </div>
+        
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
+            <header class="biasless-card-title">
+                <a href = "{{post.link_CNN}}">{{post.title_CNN}}</a>
+            </header>
+            
+            <div class="biasless-card-image">
+                <a href = "{{post.link_CNN}}">
+                    <img style="max-width:100%" src="{{post.image_CNN}}" alt="{{post.image_CNN}}">
+                        </a>
+            </div>
+            
+            <footer class="biasless-card-footer">
+                <span>CNN</span><br>
+                <span>Bias Score:</span>
+            </footer>
+        </div>
+        
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
+            <header class="biasless-card-title">
+                <a href = "{{post.link_Fox}}">{{post.title_Fox}}</a>
+            </header>
+            
+            <div class="biasless-card-image">
+                <a href = "{{post.link_Fox}}">
+                    <img style="max-width:100%" src="{{post.image_Fox}}" alt="{{post.image_Fox}}">
+                        </a>
+            </div>
+            
+            <footer class="biasless-card-footer">
+                <span>Fox News</span><br>
+                <span>Bias Score:</span>
+            </footer>
+        </div>
+        
+        <div class="biasless-card mySlides{{post.key.integer_id()}}">
+            <header class="biasless-card-title">
+                <a href = "{{post.link_Breitbart}}">{{post.title_Breitbart}}</a>
+            </header>
+            
+            <div class="biasless-card-image">
+                <a href = "{{post.link_Breitbart}}">
+                    <img style="max-width:100%" src="{{post.image_Breitbart}}" alt="{{post.image_Breitbart}}">
+                        </a>
+            </div>
+            
+            <footer class="biasless-card-footer">
+                <span>Breitbart</span><br>
+                <span>Bias Score:</span>
+            </footer>
+        </div>
+        
+    </div>
+    <!-- End of the container -->
+
+    {% endfor %}
+
+</div>
+
+<script>
+{% for post in posts %}
+
+var slideIndex{{post.key.integer_id()}} = 1;
+showDivs{{post.key.integer_id()}}(slideIndex{{post.key.integer_id()}});
+
+function plusDivs{{post.key.integer_id()}}(n) {
+  showDivs{{post.key.integer_id()}}(slideIndex{{post.key.integer_id()}} += n);
+}
+
+function currentDiv{{post.key.integer_id()}}(n) {
+  showDivs{{post.key.integer_id()}}(slideIndex{{post.key.integer_id()}} = n);
+}
+
+function showDivs{{post.key.integer_id()}}(n) {
+    var i;
+    var x = document.getElementsByClassName("mySlides{{post.key.integer_id()}}");
+    var dots = document.getElementsByClassName("dots{{post.key.integer_id()}}");
+    if (n > x.length) {slideIndex{{post.key.integer_id()}} = 1;}
+    if (n < 1) {slideIndex{{post.key.integer_id()}} = x.length;}
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace("biasless-black", "biasless-transparent");
+    }
+    x[slideIndex{{post.key.integer_id()}}-1].style.display = "block";
+    dots[slideIndex{{post.key.integer_id()}}-1].className = dots[slideIndex{{post.key.integer_id()}}-1].className.replace("biasless-transparent", "biasless-black");
+}
+{% endfor %}
+
+</script>
+
+{% endblock %}
