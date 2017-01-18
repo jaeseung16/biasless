@@ -10,8 +10,8 @@ class MainPage(Handler):
         posts, age = get_posts()
         
         if self.format == 'html':
-            #logging.warning('Mainpage %s' % len(posts))
-            #logging.warning('Mset %s' % len(list(Post.all()) ))
+            logging.warning('Mainpage %s' % len(posts))
+            logging.warning('Mset %s' % len(list(Post.query()) ))
             if self.user:
                 self.render('content.html', posts = posts, username = self.user.name, error = error)
             else:

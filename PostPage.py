@@ -13,6 +13,7 @@ class PostPage(Handler):
         if not post:
             key = ndb.Key('Post', int(post_id), parent = post_key())
             post = key.get()
+            logging.warning('not yet in the memcache')
             age_set(postkey, post)
             age = 0
         
@@ -31,10 +32,15 @@ class PostPage(Handler):
             if self.user:
                 self.render("permalink.html", post = post, username = self.user.name, comments = comments, error = error)
             else:
+                #logging.warning("Something wrong")
                 self.render("permalink.html", post = post, username = None, comments = comments, error = error)
         else:
             comments, age = get_comments(post_id)
-            self.render_json([post.as_dict()] + [c.as_dict() for c in comments])
+            
+            if comments:
+                self.render_json([post.as_dict()] + [c.as_dict() for c in comments])
+            else:
+                self.render_json([post.as_dict()])
 
     
     def get(self, post_id):
@@ -52,7 +58,7 @@ class PostPage(Handler):
                 comment = self.request.get("comment")
                 
                 if comment:
-                    c = Comment(parent = comment_key(), user_id = str(self.user.key.integer_id()), username = username, post_id = str(post.key.integer_id()), comment = comment)
+                    c = Comment(parent = comment_key(), user_id = str(self.user.key.integer_id()), username = username, post_id = str(post.key.integer_id()), comment = comment, score = '0.00', total_score = 0.0, no_scored = 0)
                     add_comment(c)
                 
                 else:
