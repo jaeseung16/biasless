@@ -2,13 +2,11 @@
 
 {% block content %}
 
-<br><br>
-
 <div class="biasless-post">
 	
 	{% for post in posts %}
     <!-- Container for a post body -->
-    <div class="biasless-content">
+    <div class="biasless-content col-1" style="float:left; {% if loop.index0 is divisibleby 3 %} clear: both; {% endif %}">
         
         <!-- Header for a post -->
         <div class="biasless-post-heading">
@@ -38,105 +36,45 @@
         
         <!-- Slides -->
         
-        <div class="biasless-card mySlides{{post.key.integer_id()}}">
-            <header class="biasless-card-title">
-                <a href = "{{post.link_NYT}}">{{post.title_NYT}}</a>
-            </header>
-            
-            <div class="biasless-card-image">
-                <a href = "{{post.link_NYT}}">
-                    <img style="max-width:100%" src="{{post.image_NYT}}" alt="{{post.image_NYT}}">
-                        </a>
-            </div>
-            
-            <footer class="biasless-card-footer">
-            <span>The New York Times</span><br>
-            <span>Biased to the Right:</span><br>
-            <span>Biased to the Left:</span><br>
-            <span>Unbiased:</span>
-            </footer>
-        </div>
+        {% for article in post.articles %}
         
         <div class="biasless-card mySlides{{post.key.integer_id()}}">
-            <header class="biasless-card-title">
-                <a href = "{{post.link_Huffington}}">{{post.title_Huffington}}</a>
-            </header>
+            <div class="biasless-article-heading">
+                <div class="biasless-article-date">
+                    {{article.created.strftime("%b %d, %Y")}}
+                </div>
+                
+                <div class="biasless-article-id">
+                    ID
+                </div>
+            </div>
             
-            <div class="biasless-card-image">
-                <a href = "{{post.link_Huffington}}">
-                    <img style="max-width:100%" src="{{post.image_Huffington}}" alt="{{post.image_Huffington}}">
+            <div class="biasless-article-title">
+                Link
+            </div>
+            
+            <div class="biasless-article-image">
+                <a href = "{{article.url}}">
+                    <img src="{{article.image}}" alt="{{article.image}}">
                         </a>
             </div>
             
-            <footer class="biasless-card-footer">
-                <span>The Huffington Post</span><br>
-                <span>Biased to the Right:</span><br>
-                <span>Biased to the Left:</span><br>
-                <span>Unbiased:</span>
-            </footer>
+            <div class="biasless-article-source">
+                From: {{article.source}}
+            </div>
+            
+            <div class="biasless-article-description">
+                
+                {{article.description}}
+            </div>
+            
         </div>
         
-        <div class="biasless-card mySlides{{post.key.integer_id()}}">
-            <header class="biasless-card-title">
-                <a href = "{{post.link_CNN}}">{{post.title_CNN}}</a>
-            </header>
-            
-            <div class="biasless-card-image">
-                <a href = "{{post.link_CNN}}">
-                    <img style="max-width:100%" src="{{post.image_CNN}}" alt="{{post.image_CNN}}">
-                        </a>
-            </div>
-            
-            <footer class="biasless-card-footer">
-                <span>CNN</span><br>
-                <span>Biased to the Right:</span><br>
-                <span>Biased to the Left:</span><br>
-                <span>Unbiased:</span>
-            </footer>
-        </div>
-        
-        <div class="biasless-card mySlides{{post.key.integer_id()}}">
-            <header class="biasless-card-title">
-                <a href = "{{post.link_Fox}}">{{post.title_Fox}}</a>
-            </header>
-            
-            <div class="biasless-card-image">
-                <a href = "{{post.link_Fox}}">
-                    <img style="max-width:100%" src="{{post.image_Fox}}" alt="{{post.image_Fox}}">
-                        </a>
-            </div>
-            
-            <footer class="biasless-card-footer">
-                <span>Fox News</span><br>
-                <span>Biased to the Right:</span><br>
-                <span>Biased to the Left:</span><br>
-                <span>Unbiased:</span>
-            </footer>
-        </div>
-        
-        <div class="biasless-card mySlides{{post.key.integer_id()}}">
-            <header class="biasless-card-title">
-                <a href = "{{post.link_Breitbart}}">{{post.title_Breitbart}}</a>
-            </header>
-            
-            <div class="biasless-card-image">
-                <a href = "{{post.link_Breitbart}}">
-                    <img style="max-width:100%" src="{{post.image_Breitbart}}" alt="{{post.image_Breitbart}}">
-                        </a>
-            </div>
-            
-            <footer class="biasless-card-footer">
-                <span>Breitbart</span><br>
-                <span>Biased to the Right:</span><br>
-                <span>Biased to the Left:</span><br>
-                <span>Unbiased:</span>
-            </footer>
-        </div>
+        {% endfor %}
         
     </div>
     <!-- End of the container -->
-    
-    <br><br>
+
     {% endfor %}
 
 </div>

@@ -2,14 +2,12 @@
 
 {% block content %}
 
-<br><br>
-
-<div class="biasless-article">
+<div class="biasless-post">
 	
 	{% for article in articles %}
 
     <!-- Container for an article body -->
-    <div class="biasless-content">
+    <div class="biasless-content col-1" style="float:left; {% if loop.index0 is divisibleby 3 %} clear: both; {% endif %}">
         <div class="biasless-article-heading">
             <div class="biasless-article-date">
                 {{article.created.strftime("%b %d, %Y")}}
@@ -44,7 +42,7 @@
         </div>
 
     </div>
-    <br><br>
+
     {% endfor %}
 
 </div>

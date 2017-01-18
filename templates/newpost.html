@@ -2,113 +2,49 @@
 
 {% block content %}
 
-<div class="w3-content" style="width:80%">
-
-<div class="w3-container w3-blue">
-	<h2>Input Form</h2>
+<div class="biasless-post">
+    <h2 align="center">Input Form</h2>
+    
+    <form method="post">
+    <input type="submit"><br>
+        
+    {% for article in articles %}
+    
+    <!-- Container for an article body -->
+    <div class="biasless-content col-1" style="float:left; {% if loop.index0 is divisibleby 3 %} clear: both; {% endif %}">
+        <div class="biasless-article-heading">
+            <div class="biasless-article-source">
+                From: {{article.source}}
+            </div>
+        </div>
+        
+        <div class="biasless-article-title">
+            <a href="article/{{article.key.integer_id()}}">{{article.title}}</a>
+        </div>
+        
+        <div class="biasless-article-image">
+            <a href = "{{article.url}}">
+                <img src="{{article.image}}" alt="{{article.image}}">
+                    </a>
+        </div>
+        
+        <div class="biasless-article-description">
+            
+            {{article.description}}
+        </div>
+        
+        <div class="biasless-article-footer">
+            <input type="checkbox" name="article" value="{{ loop.index0 }}"> This article will be added to the new post.
+        </div>
+        
+    </div>
+    
+    {% endfor %}
+    
+    </form>
+    
 </div>
 
-<div class="w3-container">{{error}}</div>
-  	
-<form class="w3-container" method="post">
-	<p>
-  		<label>Title</label>
-  		<input class="w3-input" type="text" name="title" value="{{title}}">
-  	</p>
-  	
-  	<p>
-  		<div class="w3-container">
-			<h4><a href="http://www.nytimes.com">New York Times</a></h4>
-		</div>
-	</p>
-	<p>
-  		<label>Title</label>
-  		<input class="w3-input" type="text" name="title_NYT" value="{{title_NYT}}">
-  	</p>
-	<p>
-  		<label>Link</label>
-  		<input class="w3-input" type="text" name="link_NYT" value="{{link_NYT}}">
-  	</p>
-  	<p>
-  		<label>Image</label>
-  		<input class="w3-input" type="text" name="image_NYT" value="{{image_NYT}}">
-  	</p>
-  	
-  	<p>
-  		<div class="w3-container">
-			<h4><a href="http://www.huffingtonpost.com">Huffington Post</a></h4>
-		</div>
-	</p>
-	<p>
-  		<label>Title</label>
-  		<input class="w3-input" type="text" name="title_Huffington" value="{{title_Huffington}}">
-  	</p>
-	<p>
-  		<label>Link</label>
-  		<input class="w3-input" type="text" name="link_Huffington" value="{{link_Huffington}}">
-  	</p>
-  	<p>
-  		<label>Image</label>
-  		<input class="w3-input" type="text" name="image_Huffington" value="{{image_Huffington}}">
-  	</p>
-  	
-  	<p>
-  		<div class="w3-container">
-			<h4><a href="http://www.cnn.com">CNN</a></h4>
-		</div>
-	</p>
-	<p>
-  		<label>Title</label>
-  		<input class="w3-input" type="text" name="title_CNN" value="{{title_CNN}}">
-  	</p>
-	<p>
-  		<label>Link</label>
-  		<input class="w3-input" type="text" name="link_CNN" value="{{link_CNN}}">
-  	</p>
-  	<p>
-  		<label>Image</label>
-  		<input class="w3-input" type="text" name="image_CNN" value="{{image_CNN}}">
-  	</p>
-  	
-  	<p>
-  		<div class="w3-container">
-			<h4><a href="http://www.foxnews.com">Fox News</a></h4>
-		</div>
-	</p>
-	<p>
-  		<label>Title</label>
-  		<input class="w3-input" type="text" name="title_Fox" value="{{title_Fox}}">
-  	</p>
-	<p>
-  		<label>Link</label>
-  		<input class="w3-input" type="text" name="link_Fox" value="{{link_Fox}}">
-  	</p>
-  	<p>
-  		<label>Image</label>
-  		<input class="w3-input" type="text" name="image_Fox" value="{{image_Fox}}">
-  	</p>
-  	
-  	<p>
-  		<div class="w3-container">
-			<h4><a href="http://www.breitbart.com">Breitbart</a></h4>
-		</div>
-	</p>
-	<p>
-  		<label>Title</label>
-  		<input class="w3-input" type="text" name="title_Breitbart" value="{{title_Breitbart}}">
-  	</p>
-	<p>
-  		<label>Link</label>
-  		<input class="w3-input" type="text" name="link_Breitbart" value="{{link_Breitbart}}">
-  	</p>
-  	<p>
-  		<label>Image</label>
-  		<input class="w3-input" type="text" name="image_Breitbart" value="{{image_Breitbart}}">
-  	</p>
-
-	<input type="submit">
-		
-</form>
 
 <div>
 

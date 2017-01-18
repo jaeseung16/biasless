@@ -3,7 +3,7 @@
 {% block content %}
 <br><br>
 
-<div class="biasless-article">
+<div class="biasless-article col-1">
     
     <!-- Container for an article body -->
     <div class="biasless-content">
@@ -36,8 +36,8 @@
             {{article.description}}
         </div>
         
-        <div class="biasless-article-footer" id="score">
-            Bias Score: {{article.score}}<br>
+        <div class="biasless-article-footer" id="score" style="background-color: rgb( {% if article.score|float > 0 -%} 255 {%- else -%} 0 {%- endif %}, {{ (255 - ((article.score|float)|abs) * 51)|int}}, {% if article.score|float < 0 -%} {{ (((article.score|float)|abs) * 51)|int }} {%- else -%} 0 {%- endif %})">
+            Bias Score: {{article.score}} <br>
             {% if score %}
             You gave {{ score.score }} at {{ score.created.strftime("%c") }}
             {% endif %}
