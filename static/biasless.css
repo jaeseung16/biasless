@@ -44,10 +44,6 @@ input[type=submit] {
 }
 
 
-.biasless-comment-bottom{
-    border-bottom: 1px solid rgb(192,192,192);
-}
-
 /* gradient */
 #biasless-grad1 {
     background: red; /* For browsers that do not support gradients */
@@ -119,7 +115,50 @@ input[type=submit] {
     padding: 1em;
     box-shadow:0 2px 4px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12)!important;
 }
-
+ 
+.biasless-comments-heading {
+    position: relative;
+    width: 90%;
+    margin: auto;
+    text-align: center;
+    font-size: 1.5em;
+}
+ 
+ .biasless-comments-username {
+     position: relative;
+     float: left;
+     font-weight: bold;
+     padding: 0.5em;
+ }
+ 
+ .biasless-comments-datetime {
+     position: relative;
+     float: right;
+     padding: 0.5em;
+ }
+ 
+ .biasless-comments-text {
+     position: relative;
+     width: 95%;
+     margin: auto;
+     word-wrap: break-word;
+     clear: both;
+     padding: 0.5em;
+     background-color: lightblue;
+ }
+ 
+ .biasless-comments-footer {
+     position: relative;
+     width: 90%;
+     margin: auto;
+     padding: 0.5em 0em;
+     text-align: left;
+ }
+ 
+.biasless-comment-bottom{
+    border-bottom: 1px solid rgb(192,192,192);
+}
+ 
 /* post */
 .biasless-post {
     position: relative;
@@ -295,6 +334,14 @@ input[type=submit].biasless-form {
     margin: 0.1em 0;
     width: 50%;
     box-sizing: border-box;
+}
+ 
+textarea.biasless-form {
+    padding: 0.1em 0.1em;
+    margin: 0.1em 0;
+    width: 95%;
+    box-sizing: border-box;
+    resize: none;
 }
 
 .w3-badge {
